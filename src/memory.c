@@ -21,36 +21,63 @@
  *
  */
 #include "memory.h"
+#include <stdlib.h>
 
 /***********************************************************
  Function Definitions
 ***********************************************************/
 uint8_t * my_memmove(uint8_t * src, uint8_t * dst, size_t length) {
-
+	uint8_t* temp = malloc(length * sizeof(uint8_t));
+	for(size_t i = 0;i < length;i++){
+		*(temp + i) = *(src + i);
+	}
+	for(size_t i = 0;i < length;i++){
+		*(dst + i) = *(temp + i);
+	}
+	free(temp);
+	return dst;
 }
 
 uint8_t * my_memcopy(uint8_t * src, uint8_t * dst, size_t length) {
-
+	size_t n = 0;
+	while (n < length) {
+		*(dst + n) = *(src + n);
+		n++;
+	}
+	return src;
 }
 
 uint8_t * my_memset(uint8_t * src, size_t length, uint8_t value) {
-
+	size_t n = 0;
+	while (n < length) {
+		*(src + n) = value;
+		n++;
+	}
+	return src;
 }
 
 uint8_t * my_memzero(uint8_t * src, size_t length) {
-
+	return my_memset(src, length, 0);
 }
 
 uint8_t * my_reverse(uint8_t * src, size_t length) {
-
+	size_t hN = length / 2;
+	size_t n = 0;
+	while (n < hN) {
+		uint8_t temp = *(src + n);
+		*(src + n) = *(src + length - n -1);
+		*(src + length - n -1) = temp;
+		n++;
+	}
+	return src;
 }
 
 int32_t* reserve_words(size_t length) {
-
+	return (int32_t*) malloc(length * sizeof(int32_t));
 }
 
 void free_words(int32_t* src) {
-
+	free(src);
 }
 
 void set_value(char * ptr, unsigned int index, char value){
