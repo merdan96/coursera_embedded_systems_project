@@ -17,12 +17,109 @@
  *
  * @author Alex Fosdick
  * @date April 1 2017
- *
+ * 
+ * Added memory manipulation function
+ * @auther Mohamed Merdan
+ * @date 11/6/2020
  */
 #ifndef __MEMORY_H__
 #define __MEMORY_H__
 
 #include <stdint.h>
+
+/**
+ * @brief Moves data from one array to another
+ *
+ * Given a src and a dst pointer it moves data from source to dstination
+ * while handling memory overlap problem.
+ *
+ * @param src Pointer to source data array
+ * @param dst Pointer to destination data array
+ * @param length length of data in the source and destination arrays
+ *
+ * @return uint8* pointer to destination array.
+ */
+uint8_t * my_memmove(uint8_t * src, uint8_t * dst, size_t length);
+
+
+/**
+ * @brief Copies data from one array to another
+ *
+ * Given a src and a dst pointer it copies data from source to dstination
+ * without handling memory overlap problem.
+ *
+ * @param src Pointer to source data array
+ * @param dst Pointer to destination data array
+ * @param length length of data in the source and destination arrays
+ *
+ * @return uint8* pointer to destination array.
+ */
+uint8_t * my_memcopy(uint8_t * src, uint8_t * dst, size_t length);
+
+
+/**
+ * @brief Sets array elements to a specific value
+ *
+ * Given a src pointer, sets all the elements of the array to the given value
+ *
+ * @param src Pointer to source data array
+ * @param length length of data in the source array
+ * @param value value to set to all elements
+ *
+ * @return uint8* pointer to source array.
+ */
+uint8_t * my_memset(uint8_t * src, size_t length, uint8_t value);
+
+
+/**
+ * @brief Sets array elements to a zero
+ *
+ * Given a src pointer, sets all the elements of the array to zero
+ *
+ * @param src Pointer to source data array
+ * @param length length of data in the source array
+ *
+ * @return uint8* pointer to source array.
+ */
+uint8_t * my_memzero(uint8_t * src, size_t length);
+
+
+/**
+ * @brief Reverses the order of the array
+ *
+ * Given a src pointer, reverses the order of all elements in the array
+ *
+ * @param src Pointer to source data array
+ * @param length length of data in the source array
+ *
+ * @return uint8* pointer to source array.
+ */
+uint8_t * my_reverse(uint8_t * src, size_t length);
+
+
+/**
+ * @brief Allocates dynamic memory
+ *
+ * Given a data length, allocates "length" number of words dynamically
+ *
+ * @param length length of data to allocate
+ *
+ * @return uint8* pointer to source array.
+ */
+int32_t* reserve_words(size_t length);
+
+
+/**
+ * @brief deallocates dynamic memory
+ *
+ * Given a src pointer, deallocates memory previously allocated
+ *
+ * @param src Pointer to source data array
+ *
+ * @return void.
+ */
+void free_words(int32_t* src);
+
 
 /**
  * @brief Sets a value of a data array 
