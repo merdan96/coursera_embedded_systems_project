@@ -19,11 +19,16 @@
  * @date 15/5/2020
  *
  */
-#ifndef __STATS_H__
-#define __STATS_H__
+#ifndef __DATA_H__
+#define __DATA_H__
 
 #include <stdint.h>
 #include "platform.h"
+
+#define NEGATIVE 4294967296
+#define POSITIVE 2147483647
+
+//static const uint8_t CHARS[16] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 
 /**
  * @brief Converts a integer into an ASCII String
@@ -35,7 +40,7 @@
  * @param ptr pointer to the string to be returned
  * @param base of the output data
  *
- * @return returns length of the output string
+ * @return uint8_t length of the output string
  */
 uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base);
 
@@ -50,7 +55,20 @@ uint8_t my_itoa(int32_t data, uint8_t * ptr, uint32_t base);
  * @param digits number of digits in the string
  * @param base of the input data
  *
- * @return returns length of the output string
+ * @return int32_t output data
  */
 int32_t my_atoi(uint8_t * ptr, uint8_t digits, uint32_t base);
-#endif /* __STATS_H__ */
+
+
+/**
+ * @brief Finds a char's index
+ *
+ * Given the character, it looks up its index in the predefined
+ * characters array
+ *
+ * @param ch character
+ *
+ * @return uint8_t character index
+ */
+uint8_t get_index(uint8_t ch);
+#endif /* __DATA_H__ */
