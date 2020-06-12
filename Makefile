@@ -37,7 +37,17 @@ ifndef PLATFORM
 PLATFORM=HOST
 endif
 
-TARGET = c1m2
+TEST = 
+V = 
+ifeq ($(COURSE1), TRUE)
+TEST = -DCOURSE1
+endif
+
+ifeq ($(VERBOSE), TRUE)
+V = -DVERBOSE
+endif
+
+TARGET = finalProject
 
 #Common platform c-flags
 CFLAGS = -Wall -Werror -g -O0 -std=c99
@@ -52,7 +62,7 @@ ifeq ($(PLATFORM),MSP432)
 	FPUARCH = -mfpu=fpv4-sp-d16
 
 	#Platform specific flags for only the cross-compiler
-	LINKER_FILE = -T ../msp432p401r.ld
+	LINKER_FILE = -T msp432p401r.ld
 
 	#Extension for the cross-compiler
 	EXT = arm-none-eabi-
@@ -73,7 +83,7 @@ ASMS = $(SOURCES:.c=.asm)
 PREP = $(SOURCES:.c=.i)
 
 %.o : %.c
-	$(CC) -c $< $(CFLAGS) $(CPPFLAGS) -o $@ $(ARMFLAGS) -D$(PLATFORM)
+	$(CC) -c $< $(CFLAGS) $(CPPFLAGS) -o $@ $(ARMFLAGS) -D$(PLATFORM) $(TEST) $(V)
 	
 %.i : %.c
 	$(CC) -E $< $(CFLAGS) $(CPPFLAGS) -o $@ $(ARMFLAGS) -D$(PLATFORM)

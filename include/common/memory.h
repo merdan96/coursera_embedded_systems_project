@@ -26,6 +26,7 @@
 #define __MEMORY_H__
 
 #include <stdint.h>
+#include <stddef.h>
 
 /**
  * @brief Moves data from one array to another
